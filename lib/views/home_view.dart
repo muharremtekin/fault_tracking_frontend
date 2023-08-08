@@ -1,25 +1,28 @@
+import 'dart:typed_data';
+
+import 'package:fault_tracking_frontend/viewModels/create_fault_record_viewmodel.dart';
+import 'package:fault_tracking_frontend/views/create_fault_record_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import 'create_fault_record_view.dart';
-import 'create_fault_record_viewmodel.dart';
-import 'fault_record_model.dart';
-
-class HomeView extends StatefulWidget {
-  const HomeView({super.key});
+// ignore: public_member_api_docs
+class FaultListView extends StatefulWidget {
+  // ignore: public_member_api_docs
+  const FaultListView({super.key});
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  State<FaultListView> createState() => _FaultListViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _FaultListViewState extends State<FaultListView> {
   final CreateFaultRecordViewModel viewModel = CreateFaultRecordViewModel();
 
   void _navigateToCreateFeultRecordView(BuildContext context) {
     Navigator.push(
       context,
+      // ignore: inference_failure_on_instance_creation
       MaterialPageRoute(
-        builder: (context) => CreateFeultRecordView(viewModel: viewModel),
+        builder: (context) => CreateFaultRecordView(viewModel: viewModel),
       ),
     );
   }
@@ -27,8 +30,9 @@ class _HomeViewState extends State<HomeView> {
   void _navigateToUpdateFeultRecordView(BuildContext context, int index) {
     Navigator.push(
       context,
+      // ignore: inference_failure_on_instance_creation
       MaterialPageRoute(
-        builder: (context) => CreateFeultRecordView(
+        builder: (context) => CreateFaultRecordView(
           viewModel: viewModel,
           isEdit: true,
           index: index,
@@ -66,12 +70,11 @@ class _HomeViewState extends State<HomeView> {
             child: Observer(
               builder: (_) {
                 return ListView.separated(
-                  scrollDirection: Axis.vertical,
                   itemCount: viewModel.records.length,
                   separatorBuilder: (context, index) => const Divider(),
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8),
                       child: _buildListTileItem(index, context),
                     );
                   },
@@ -85,7 +88,7 @@ class _HomeViewState extends State<HomeView> {
   }
 
   ListTile _buildListTileItem(int index, BuildContext context) {
-    FaultRecordModel record = viewModel.records[index];
+    final record = viewModel.records[index];
     return ListTile(
       title: Text(record.title),
       subtitle: Text(record.description),
@@ -95,7 +98,7 @@ class _HomeViewState extends State<HomeView> {
               height: 40,
               width: 40,
               child: Image.memory(
-                record.images.first,
+                record.images.first as Uint8List,
               ),
             )
           : const Icon(Icons.image_not_supported),
@@ -129,10 +132,8 @@ class _HomeViewState extends State<HomeView> {
           switch (value) {
             case PopupMenuValues.delete:
               _deleteDialog(context, index);
-              break;
             case PopupMenuValues.update:
               _navigateToUpdateFeultRecordView(context, index);
-              break;
           }
         },
       ),

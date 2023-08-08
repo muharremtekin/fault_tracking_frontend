@@ -9,6 +9,41 @@ part of 'create_fault_record_viewmodel.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$CreateFaultRecordViewModel on _CreateFaultRecordViewModelBase, Store {
+  late final _$titleControllerAtom = Atom(
+      name: '_CreateFaultRecordViewModelBase.titleController',
+      context: context);
+
+  @override
+  TextEditingController get titleController {
+    _$titleControllerAtom.reportRead();
+    return super.titleController;
+  }
+
+  @override
+  set titleController(TextEditingController value) {
+    _$titleControllerAtom.reportWrite(value, super.titleController, () {
+      super.titleController = value;
+    });
+  }
+
+  late final _$descriptionControllerAtom = Atom(
+      name: '_CreateFaultRecordViewModelBase.descriptionController',
+      context: context);
+
+  @override
+  TextEditingController get descriptionController {
+    _$descriptionControllerAtom.reportRead();
+    return super.descriptionController;
+  }
+
+  @override
+  set descriptionController(TextEditingController value) {
+    _$descriptionControllerAtom.reportWrite(value, super.descriptionController,
+        () {
+      super.descriptionController = value;
+    });
+  }
+
   late final _$recordsAtom =
       Atom(name: '_CreateFaultRecordViewModelBase.records', context: context);
 
@@ -54,6 +89,22 @@ mixin _$CreateFaultRecordViewModel on _CreateFaultRecordViewModelBase, Store {
   set isLoading(bool value) {
     _$isLoadingAtom.reportWrite(value, super.isLoading, () {
       super.isLoading = value;
+    });
+  }
+
+  late final _$isEditAtom =
+      Atom(name: '_CreateFaultRecordViewModelBase.isEdit', context: context);
+
+  @override
+  bool get isEdit {
+    _$isEditAtom.reportRead();
+    return super.isEdit;
+  }
+
+  @override
+  set isEdit(bool value) {
+    _$isEditAtom.reportWrite(value, super.isEdit, () {
+      super.isEdit = value;
     });
   }
 
@@ -134,6 +185,28 @@ mixin _$CreateFaultRecordViewModel on _CreateFaultRecordViewModelBase, Store {
   }
 
   @override
+  void changeIsEditState() {
+    final _$actionInfo = _$_CreateFaultRecordViewModelBaseActionController
+        .startAction(name: '_CreateFaultRecordViewModelBase.changeIsEditState');
+    try {
+      return super.changeIsEditState();
+    } finally {
+      _$_CreateFaultRecordViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void clearControllers() {
+    final _$actionInfo = _$_CreateFaultRecordViewModelBaseActionController
+        .startAction(name: '_CreateFaultRecordViewModelBase.clearControllers');
+    try {
+      return super.clearControllers();
+    } finally {
+      _$_CreateFaultRecordViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void removeImageToSelectedImages(int index) {
     final _$actionInfo =
         _$_CreateFaultRecordViewModelBaseActionController.startAction(
@@ -183,9 +256,12 @@ mixin _$CreateFaultRecordViewModel on _CreateFaultRecordViewModelBase, Store {
   @override
   String toString() {
     return '''
+titleController: ${titleController},
+descriptionController: ${descriptionController},
 records: ${records},
 selectedImages: ${selectedImages},
 isLoading: ${isLoading},
+isEdit: ${isEdit},
 titleNumber: ${titleNumber}
     ''';
   }

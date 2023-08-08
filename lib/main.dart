@@ -1,5 +1,5 @@
+import 'package:fault_tracking_frontend/views/home_view.dart';
 import 'package:flutter/material.dart';
-import 'home_view.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData.dark(useMaterial3: true),
       debugShowCheckedModeBanner: false,
-      home: const HomeView(),
+      home: const FaultListView(),
     );
   }
 }

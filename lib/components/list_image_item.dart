@@ -1,12 +1,14 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 
 class ListImageItem extends StatelessWidget {
   const ListImageItem({
-    super.key,
     required this.index,
     required this.onDelete,
     required this.imageBytes,
+    super.key,
     this.width = 48,
     this.height = 64,
   });
